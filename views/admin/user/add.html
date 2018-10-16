@@ -1,0 +1,269 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<title>控制台 - Bootstrap后台管理系统模版Ace下载</title>
+	<meta name="keywords" content="Bootstrap模版,Bootstrap模版下载,Bootstrap教程,Bootstrap中文" />
+	<meta name="description" content="站长素材提供Bootstrap模版,Bootstrap教程,Bootstrap中文翻译等相关Bootstrap插件下载" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<!-- basic styles -->
+	<link href="/admin/css/bootstrap.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="/admin/css/font-awesome.min.css" />
+	<!-- ace styles -->
+	<link rel="stylesheet" href="/admin/css/ace.min.css" />
+	<link rel="stylesheet" href="/admin/css/ace-rtl.min.css" />
+	<link rel="stylesheet" href="/admin/css/ace-skins.min.css" />
+
+	<script src="/admin/js/ace-extra.min.js"></script>
+	<style>
+		.form-horizontal .form-group{
+			height: 44px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="navbar navbar-default" id="navbar">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('navbar', 'fixed')
+			} catch (e) {}
+		</script>
+
+		{{include 'admin/common/nav-top.html'}}
+	</div><!-- /.container -->
+	</div>
+
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {}
+		</script>
+
+		<div class="main-container-inner">
+			<a class="menu-toggler" id="menu-toggler" href="#">
+				<span class="menu-text"></span>
+			</a>
+
+			{{include 'admin/common/nav-sider.html'}}
+
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<script type="text/javascript">
+						try {
+							ace.settings.check('breadcrumbs', 'fixed')
+						} catch (e) {}
+					</script>
+
+					<ul class="breadcrumb">
+						<li>
+							<i class="icon-home home-icon"></i>
+							<a href="#">首页</a>
+						</li>
+						<li class="active">控制台</li>
+					</ul><!-- .breadcrumb -->
+					<div class="nav-search" id="nav-search">
+						<form class="form-search">
+							<span class="input-icon">
+								<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+								<i class="icon-search nav-search-icon"></i>
+							</span>
+						</form>
+					</div><!-- #nav-search -->
+				</div>
+				<div class="page-content">
+					<div class="page-header">
+						<h1>
+							列表
+						</h1>
+					</div><!-- /.page-header -->
+					<form class="form-horizontal" role="form">
+						<div class="form-group">
+							<label class="col-sm-2 control-label no-padding-right" for="form-field-1">用户名:</label>
+
+							<div class="col-sm-10">
+								<input type="text" id="form-field-1" placeholder="" class="col-xs-10 col-sm-5">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label no-padding-right" for="form-field-2">用户密码:</label>
+							<div class="col-sm-10">
+								<input type="text" id="form-field-2" placeholder="" class="col-xs-10 col-sm-5">
+								<span class="help-inline col-xs-12 col-sm-7">
+									<span class="middle">如果填写则跳转到外部地址（选填）</span>
+								</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label no-padding-right"></label>
+							<div class="col-sm-2">
+								<button class="btn btn-primary" id="form-save">保存</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div><!-- /.main-content -->
+
+		</div><!-- /.main-container-inner -->
+
+		<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+			<i class="icon-double-angle-up icon-only bigger-110"></i>
+		</a>
+	</div><!-- /.main-container -->
+
+
+	<!--[if !IE]> -->
+
+	<script type="text/javascript">
+		window.jQuery || document.write("<script src='/admin/js/jquery-2.0.3.min.js'>" + "<" + "script>");
+	</script>
+
+	<!-- <![endif]-->
+
+	<!--[if IE]>
+<script type="text/javascript">
+ window.jQuery || document.write("<script src='/admin/js/jquery-1.10.2.min.js'>"+"<"+"script>");
+</script>
+<![endif]-->
+
+	<script type="text/javascript">
+		if ("ontouchend" in document) document.write("<script src='/admin/js/jquery.mobile.custom.min.js'>" + "<" + "script>");
+	</script>
+	<script src="/admin/js/bootstrap.min.js"></script>
+
+
+
+	<script src="/admin/js/typeahead-bs2.min.js"></script>
+
+
+	<script src="/admin/js/bootstrap-wysiwyg.min.js"></script>
+
+	<!-- ace scripts -->
+
+	<script src="/admin/js/ace-elements.min.js"></script>
+	<script src="/admin/js/ace.min.js"></script>
+
+
+
+	<script type="text/javascript">
+		$(function () {
+
+			$('#form-save').click(function(ev){
+				ev.preventDefault();
+				let userName = $('#form-field-1').eq(0).val();
+				let password = $('#form-field-2').eq(0).val();
+				$.post('/admin/manager/add',{
+					userName,
+					password,
+				},res => {
+					if(res.success){
+						alert('新增成功')
+					}
+				})
+			})
+			function showErrorAlert(reason, detail) {
+				var msg = '';
+				if (reason === 'unsupported-file-type') {
+					msg = "Unsupported format " + detail;
+				} else {
+					console.log("error uploading file", reason, detail);
+				}
+				$('<div class="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button>' +
+					'<strong>File upload error</strong> ' + msg + ' </div>').prependTo('#alerts');
+			}
+
+			$('#editor1').ace_wysiwyg({
+				toolbar: [
+					'font',
+					null,
+					'fontSize',
+					null,
+					{
+						name: 'bold',
+						className: 'btn-info'
+					},
+					{
+						name: 'italic',
+						className: 'btn-info'
+					},
+					{
+						name: 'strikethrough',
+						className: 'btn-info'
+					},
+					{
+						name: 'underline',
+						className: 'btn-info'
+					},
+					null,
+					{
+						name: 'insertunorderedlist',
+						className: 'btn-success'
+					},
+					{
+						name: 'insertorderedlist',
+						className: 'btn-success'
+					},
+					{
+						name: 'outdent',
+						className: 'btn-purple'
+					},
+					{
+						name: 'indent',
+						className: 'btn-purple'
+					},
+					null,
+					{
+						name: 'justifyleft',
+						className: 'btn-primary'
+					},
+					{
+						name: 'justifycenter',
+						className: 'btn-primary'
+					},
+					{
+						name: 'justifyright',
+						className: 'btn-primary'
+					},
+					{
+						name: 'justifyfull',
+						className: 'btn-inverse'
+					},
+					null,
+					{
+						name: 'createLink',
+						className: 'btn-pink'
+					},
+					{
+						name: 'unlink',
+						className: 'btn-pink'
+					},
+					null,
+					{
+						name: 'insertImage',
+						className: 'btn-success'
+					},
+					null,
+					'foreColor',
+					null,
+					{
+						name: 'undo',
+						className: 'btn-grey'
+					},
+					{
+						name: 'redo',
+						className: 'btn-grey'
+					}
+				],
+				'wysiwyg': {
+					fileUploadError: showErrorAlert
+				}
+			}).prev().addClass('wysiwyg-style2');
+
+		})
+	</script>
+
+</body>
+
+</html>
