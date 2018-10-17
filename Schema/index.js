@@ -2,14 +2,16 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Types;
 const ObjectId = Schema.ObjectId;
 const userSchema = require('./user');
+const articleSchema = require('./article');
 mongoose.connect('mongodb://localhost/cms');
-
+ 
 const db = mongoose.connection;
 db.on('open', () => {
   console.log('connected ===============');
 });
 
 const User = mongoose.model('cms', userSchema);
+const Article = mongoose.model('article', ArticleSchema);
 
 class UserDAO {
   async queryUser(condition,callback) {
@@ -44,8 +46,15 @@ class UserDAO {
   }
 }
 
+const ArticleDAO = {
+  find: async function(condition){
+    
+  }
+}
+
 module.exports = {
   userSchema,
   UserDAO: new UserDAO(),
+  ArticleDAO,
   ObjectId
 }
