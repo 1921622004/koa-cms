@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Types;
 const ObjectId = Schema.ObjectId;
 const userSchema = require('./user');
-const articleSchema = require('./article');
+const articleSchema = require('./article')
 mongoose.connect('mongodb://localhost/cms');
  
 const db = mongoose.connection;
@@ -11,7 +11,7 @@ db.on('open', () => {
 });
 
 const User = mongoose.model('cms', userSchema);
-const Article = mongoose.model('article', ArticleSchema);
+const Article = mongoose.model('article', articleSchema);
 
 class UserDAO {
   async queryUser(condition,callback) {

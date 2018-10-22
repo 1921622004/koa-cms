@@ -1,6 +1,6 @@
 const router = require('koa-router')();
 const manager = require('./admin/manager');
-const article = require('./admin/article');
+const login = require('./admin/login');
 const svgCaptcha = require('svg-captcha');
 
 const {
@@ -74,10 +74,7 @@ router.get('/logout', async ctx => {
     ctx.session.userinfo = null;
     ctx.redirect('/admin/manager/list');
 })
-router.use('/login', async ctx => {
-    await ctx.render('admin/login')
-});
+router.use('/login', login);
 router.use('/manager', manager);
-router.use('/article',article);
 
 module.exports = router.routes();
