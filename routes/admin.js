@@ -2,6 +2,7 @@ const router = require('koa-router')();
 const manager = require('./admin/manager');
 const login = require('./admin/login');
 const svgCaptcha = require('svg-captcha');
+const article = require('./admin/article');
 
 const {
     UserDAO,
@@ -76,5 +77,6 @@ router.get('/logout', async ctx => {
 })
 router.use('/login', login);
 router.use('/manager', manager);
+router.use('/article',article)
 
 module.exports = router.routes();

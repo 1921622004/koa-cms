@@ -4,7 +4,7 @@ const ObjectId = Schema.ObjectId;
 const userSchema = require('./user');
 const articleSchema = require('./article')
 mongoose.connect('mongodb://localhost/cms');
- 
+
 const db = mongoose.connection;
 db.on('open', () => {
   console.log('connected ===============');
@@ -48,7 +48,14 @@ class UserDAO {
 
 const ArticleDAO = {
   find: async function(condition){
+    let list = await Article.find(condition).lean().exec();
+    console.log(list);
     
+    if(!list ) {
+      return new Error()
+    } else {
+      return list
+    }
   }
 }
 
@@ -56,5 +63,6 @@ module.exports = {
   userSchema,
   UserDAO: new UserDAO(),
   ArticleDAO,
-  ObjectId
+  ObjectId,
+  ArticleDAO
 }
