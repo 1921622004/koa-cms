@@ -147,16 +147,15 @@
 
 	<script type="text/javascript">
 		$(function () {
-
-			$('#form-save').click(function(ev){
+			$('#form-save').click(function (ev) {
 				ev.preventDefault();
 				let userName = $('#form-field-1').eq(0).val();
 				let password = $('#form-field-2').eq(0).val();
-				$.post('/admin/manager/add',{
+				$.post('/admin/manager/add', {
 					userName,
 					password,
-				},res => {
-					if(res.success){
+				}, res => {
+					if (res.success) {
 						alert('新增成功')
 					}
 				})

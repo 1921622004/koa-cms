@@ -49,8 +49,6 @@ class UserDAO {
 const ArticleDAO = {
   find: async function(condition){
     let list = await Article.find(condition).lean().exec();
-    console.log(list);
-    
     if(!list ) {
       return new Error()
     } else {
